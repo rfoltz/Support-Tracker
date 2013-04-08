@@ -268,6 +268,10 @@ input#subject {
 	padding:5px 10px;
 }
 
+.link-colour {
+	color:#4DA6FF;
+}
+
 
 /* ==========================================================================
    Media Queries
@@ -288,12 +292,6 @@ input#subject {
 /* ====================
     INTERMEDIATE: Menu
    ==================== */
-  
-  .logo{
-   		height:104px;
-   		width:285px;
-   }
-
 
     nav a {
         float: left;
@@ -304,6 +302,10 @@ input#subject {
         -webkit-border-radius: 0;
 	    -moz-border-radius: 0;
 	    border-radius: 0;
+    }
+    
+    .login-menu a {
+        width: 49%;
     }
 	
 	nav a:hover {
@@ -337,6 +339,15 @@ input#subject {
 		height: 20px;
 	}
 	
+	.login-menu {
+    	float:right;
+    	width:30%;
+    }
+    
+    #logo {
+		float:left;
+		margin-right:10px;
+	}
 
 
 /* ========================
@@ -377,6 +388,11 @@ input#subject {
 	nav {
     	float:right;
     	width:65%;
+    }
+    
+    .login-menu {
+    	float:right;
+    	width:30%;
     }
 
 /* ============
