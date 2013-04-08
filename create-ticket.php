@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!--Source File: login.php
+<!--Source File: create-ticket.php
 Name:Robert Foltz
 Last Modified By: Robert Foltz
 Website Name: Support Tracker
-File Description: This is the login page to view, and create tickets.
+File Description: This is the page that people use to create a ticket.
 -->
 
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -30,11 +30,13 @@ File Description: This is the login page to view, and create tickets.
     -->
         <div class="header-container">
             <header class="wrapper clearfix">
-            	<h1 id="logo" class="title">Support Tracker</h1>
-            	<nav class="login-menu">
+            	<h1 class="title">Support Tracker</h1>
+            	<nav>
                     <ul>
-                    	<li><a href="index.php">Home</a></li>
-                        <li><a href="login.php">Login</a></li>
+                        <li><a href="create-ticket.php">Create Ticket</a></li>
+                        <li><a href="your-tickets.php">Your Tickets</a></li>
+                        <li><a href="queue.php">Ticket Queue</a></li>
+                        <li><a href="#">Logout</a></li>
                     </ul>
                 </nav>
             </header>
@@ -45,21 +47,37 @@ File Description: This is the login page to view, and create tickets.
     -->
         <div class="main-container">
             <div class="main wrapper clearfix">
-            	<h1>Support Tracker Login</h1>
-				<form action="#" method="POST" enctype="multipart/form-data" id="login_form">
-					<table id="login-table">
-						<tr>
-							<td>Username: </td>
-							<td><input type="text" name="username" id="username"></td>
-						</tr>
-						<tr>
-							<td>Password:</td>
-							<td><input type="password" name="password" id="password"></td>
-						</tr>
-						<tr>
-							<td colspan="2"><input id="submit" style="float:right;" type="submit" value="Login"></td>
-						</tr>
-					</table>
+                <h1 class="create-heading">Create Ticket</h1>
+                <p class="alert" >All Items with a * are required</p>
+                <form action="">
+                <label for="email"><span class="alert">*</span>Customer Email:</label><br>
+				<input type="text" name="email" id="email" placeholder="name@mail.com"><br>
+				
+				<label for="name"><span class="alert">*</span>Customer Name:</label><br>
+				<input type="text" name="name" id="name" placeholder="John Smith"><br>
+				
+				<label for="country"><span class="alert">*</span>Customer Country:</label><br>
+				<input type="text" name="country" id="country" placeholder="Canada"><br>
+				
+				<label for="category"><span class="alert">*</span>Category:</label><br>
+				<select name="category" id="category">
+					<option value=""></option>
+					<option value="1">Product Question</option>
+					<option value="2">Product Issue</option>
+				</select><br>
+				
+				<label for="issue"><span class="alert">*</span>Question/Issue:</label><br>
+				<textarea class="textareas"></textarea><br>
+				
+				<label for="technician"> Assign a Technician:</label><br>
+				<select name="technician" id="technician">
+					<option value=""></option>
+					<option value="1">Tom Tsiliopoulos</option>
+					<option value="2">Robert Foltz</option>
+					<option value="3">Kaitlyn Gray</option>
+				</select><br>
+				
+				<input class="spaced" id="submit" type="submit" value="Submit Ticket"><br>
 				</form>
             </div> <!-- #main -->
         </div> <!-- #main-container -->

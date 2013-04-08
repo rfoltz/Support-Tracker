@@ -77,18 +77,18 @@ body {
 }
 
 /* ===================
-    ALL: Orange Theme
+    ALL: Black Theme
    =================== */
 
 .header-container {
     /*border-bottom: 10px solid #e44d26;*/
-	border-bottom: 10px solid #3F3F3F;
+	border-bottom: 15px solid #3F3F3F;
 }
 
 .footer-container,
 .main aside {
     /*border-top: 10px solid #e44d26;*/
-	border-top: 10px solid #3F3F3F;
+	border-top: 15px solid #3F3F3F;
 }
 
 .header-container,
@@ -98,8 +98,8 @@ body {
 }
 
 .title {
-        color:white;
-    }
+    color:white;
+}
 
 /* ==============
     MOBILE: Menu
@@ -251,7 +251,7 @@ input#subject {
 	color:#FFFFFF;
 }
 
-.b-login {
+.as {
 	float:right;
 	margin-bottom:20px;
 }
@@ -272,17 +272,48 @@ input#subject {
 	color:#4DA6FF;
 }
 
+#ticket-queue td{
+	padding:5px;
+	text-align:center;
+}
+
+#ticket-queue a:link, a:visited {
+    color: blue;
+}
+
+#ticket-queue a:active{ /* There to make sure people know they've clicked a link */
+    color: red;
+}
+
+.spaced {
+	margin:15px 10px 0 0;
+}
+
+.create-heading {
+	font-size:1.5em;
+	text-decoration:underline;
+}
+
+.alert {
+	color:red;
+}
+
+.tables td{
+	padding:10px 10px 5px 0;
+}
+
 
 /* ==========================================================================
    Media Queries
    ========================================================================== */
 @media only screen and (max-width: 480px) { /*If the with is lower then 480px then hide these elements. */
-	.gone {
-		display:none;
-	}
-	
 	.title {
 		text-align: center;
+	}
+	
+	.textareas {
+		width:350px;
+		height:175px;
 	}
 }
 
@@ -347,6 +378,11 @@ input#subject {
     #logo {
 		float:left;
 		margin-right:10px;
+	}
+	
+	.textareas {
+		width:430px;
+		height:150px;
 	}
 
 
@@ -414,6 +450,11 @@ input#subject {
         float: left;
         width: 100%;
     }
+    
+    .textareas {
+		width:650px;
+		height:150px;
+	}
 	
 }
 

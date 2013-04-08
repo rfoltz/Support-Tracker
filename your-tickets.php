@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!--Source File: login.php
+<!--Source File: index.php
 Name:Robert Foltz
 Last Modified By: Robert Foltz
 Website Name: Support Tracker
-File Description: This is the login page to view, and create tickets.
+File Description: This is the page the displays the currently logged in user their tickets.
 -->
 
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -30,11 +30,13 @@ File Description: This is the login page to view, and create tickets.
     -->
         <div class="header-container">
             <header class="wrapper clearfix">
-            	<h1 id="logo" class="title">Support Tracker</h1>
-            	<nav class="login-menu">
+            	<h1 class="title">Support Tracker</h1>
+            	<nav>
                     <ul>
-                    	<li><a href="index.php">Home</a></li>
-                        <li><a href="login.php">Login</a></li>
+                        <li><a href="create-ticket.php">Create Ticket</a></li>
+                        <li><a href="your-tickets.php">Your Tickets</a></li>
+                        <li><a href="queue.php">Ticket Queue</a></li>
+                        <li><a href="#">Logout</a></li>
                     </ul>
                 </nav>
             </header>
@@ -45,21 +47,40 @@ File Description: This is the login page to view, and create tickets.
     -->
         <div class="main-container">
             <div class="main wrapper clearfix">
-            	<h1>Support Tracker Login</h1>
-				<form action="#" method="POST" enctype="multipart/form-data" id="login_form">
-					<table id="login-table">
+            	<p class="as">Logged In As: <span>User ID</span></p>
+                <h1>Currently Assigned Tickets</h1>
+                <form action="">
+					<table id="ticket-queue" border="1">
 						<tr>
-							<td>Username: </td>
-							<td><input type="text" name="username" id="username"></td>
+							<th></th>
+							<th>Ticket #</th>
+							<th>Category</th>
+							<th>Created</th>
+							<th>Last Updated</th>
+							<th>View</th>
+							<th>Update</th>
 						</tr>
 						<tr>
-							<td>Password:</td>
-							<td><input type="password" name="password" id="password"></td>
+							<td><input type="checkbox" name="checked" value="1"></td>
+							<td><a href="#">#0000001</a></td>
+							<td>Product Question</td>
+							<td>2013-04-02 13:00</td>
+							<td>2013-04-05 12:01</td>
+							<td><a href="#">View</a></td>
+							<td><a href="#">Update</a></td>
 						</tr>
 						<tr>
-							<td colspan="2"><input id="submit" style="float:right;" type="submit" value="Login"></td>
+							<td><input type="checkbox" name="checked" value="2"></td>
+							<td><a href="#">#0000002</a></td>
+							<td>Product Issue</td>
+							<td>2013-04-02 13:00</td>
+							<td>2013-04-05 12:01</td>
+							<td><a href="#">View</a></td>
+							<td><a href="#">Update</a></td>
 						</tr>
 					</table>
+					<input class="spaced" type="submit" name="delete" value="Delete">
+					<input class="spaced" type="submit" name="completed" value="Completed">
 				</form>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
