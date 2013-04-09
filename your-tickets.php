@@ -7,7 +7,7 @@
 	$stmt->bindValue(1, $_SESSION['UserID']);
 	$stmt->execute();
 	
-	// Check if user provided correct username and password
+	// Grab the tickets
 	$ticket_info = $stmt->fetchAll();
 ?>
 
@@ -90,7 +90,7 @@ File Description: This is the page the displays the currently logged in user the
 							<td><?php echo($category['Catname']); ?></td>
 							<td><?php echo($ticket['Created']); ?></td>
 							<td><?php echo($ticket['Updated']); ?></td>
-							<td><a href="#">View</a></td>
+							<td><a href="view-ticket.php?number=<?php echo($ticket['Num']); ?>">View</a></td>
 							<td><a href="#">Update</a></td>
 						</tr>
 						<?php endforeach; ?>

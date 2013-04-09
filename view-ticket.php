@@ -1,3 +1,20 @@
+<?php require_once('authority.php'); ?>
+<?php require_once('dbConnection.php'); ?>
+
+<?php
+	
+	if(isset($_GET['number'])) //Only connect to the database if a ticket is being queried.
+	{
+		//Query database for all tickets assigned to the current user.
+		$stmt = $db->prepare('select *,LPAD(Num,7,"0") as ticket_num from tickets where num = ?');
+		$stmt->bindValue(1, $_GET['number']);
+		$stmt->execute();
+	
+		// Grab the tickets
+		$ticket_info = $stmt->fetch();
+	}
+?>
+
 <!DOCTYPE html>
 <!--Source File: create-ticket.php
 Name:Robert Foltz
@@ -36,7 +53,7 @@ File Description: This is the page that people use to create a ticket.
                         <li><a href="create-ticket.php">Create Ticket</a></li>
                         <li><a href="your-tickets.php">Your Tickets</a></li>
                         <li><a href="queue.php">Ticket Queue</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="authority.php?logout=true">Logout</a></li>
                     </ul>
                 </nav>
             </header>
@@ -47,44 +64,62 @@ File Description: This is the page that people use to create a ticket.
     -->
         <div class="main-container">
             <div class="main wrapper clearfix">
-                <h1 class="create-heading">Veiwing Ticket #: 0000001</h1>
-                <p class="alert" >All Items with a * are required</p>
+            <?php if(isset($_GET['number'])) { ?>
+                <h1 class="create-heading">Veiwing Ticket #: <?php echo($ticket_info['ticket_num']); ?></h1>
                 <table class="tables">
+					<?php	
+						//Check for what category the ticket is in.
+						$stmt = $db->prepare('select * from techs where UserID = ?');
+						$stmt->bindValue(1, $ticket_info['Technician']);
+						$stmt->execute();
+
+						// Check if user provided correct username and password
+						$tech = $stmt->fetch();
+					?>
 					<tr>
 						<td><label>Technician:</label></td>
-						<td>Tom Tsiliopoulos</td>
+						<td><?php echo($tech['Firstname']." ".$tech['Lastname']); ?></td>
 					</tr>
+					<?php	
+						//Check for what category the ticket is in.
+						$stmt = $db->prepare('select Catname from category where CatID = ?');
+						$stmt->bindValue(1, $ticket_info['Category']);
+						$stmt->execute();
+
+						// Check if user provided correct username and password
+						$category = $stmt->fetch();
+					?>
 					<tr>
 						<td><label>Category:</label></td>
-						<td>Product Question</td>
+						<td><?php echo($category['Catname']); ?></td>
 					</tr>
 					<tr>
 						<td><label>Created:</label></td>
-						<td>2013-04-02 13:00</td>
+						<td><?php echo($ticket_info['Created']); ?></td>
 					</tr>
 					<tr>
 						<td><label>Last Updated:</label></td>
-						<td>2013-04-05 12:01</td>
+						<td><?php echo($ticket_info['Updated']); ?></td>
 					</tr>
 					<tr>
 						<td><label>Customer Email:</label></td>
-						<td><a href="mailto:customer@supporttracker.com">customer@supporttracker.com</a></td>
+						<td><a href="mailto:<?php echo($ticket_info['CEmail']); ?>"><?php echo($ticket_info['CEmail']); ?></a></td>
 					</tr>
 					<tr>
 						<td><label>Customer Name:</label></td>
-						<td>Robert Foltz</td>
+						<td><?php echo($ticket_info['CName']); ?></td>
 					</tr>
 					<tr>
 						<td><label>Customer Country:</label></td>
-						<td>Canada</td>
+						<td><?php echo($ticket_info['CCountry']); ?></td>
 					</tr>
 				</table>
 				<label>Question/Issue:</label><br>
-				<textarea class="textareas" disabled="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida, lacus ac tincidunt laoreet, nulla augue volutpat sem, ac accumsan ipsum velit ut risus. Fusce varius suscipit justo, id suscipit augue imperdiet quis. Praesent auctor libero nec nisi lacinia fringilla. Curabitur tortor arcu, congue sed pharetra pellentesque, dignissim ac dolor. Etiam dignissim, purus et feugiat malesuada, felis neque blandit odio, vitae sagittis tortor justo nec ipsum. Cras in ante sed magna pretium rutrum. In hac habitasse platea dictumst. Nam ullamcorper volutpat justo quis pretium. Phasellus vel justo erat. Suspendisse luctus aliquet malesuada. Cras in cursus erat. Quisque venenatis urna in mi semper a pharetra metus mattis. Aenean facilisis cursus nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-
-Cras adipiscing ante sit amet metus dapibus egestas. Donec eros tortor, laoreet tempor imperdiet interdum, posuere vel augue. Praesent feugiat semper felis sit amet tempor. Nunc ultrices rhoncus augue vel pharetra. Suspendisse volutpat, nibh id luctus elementum, nunc tortor convallis dolor, ut viverra nisi tellus vel elit. In eu turpis nisi. Nulla facilisi. Donec a tortor non sapien porta accumsan. Proin semper facilisis vehicula. In vitae sem urna. Nulla facilisi. Etiam molestie dolor ut arcu aliquam ornare. Proin ipsum nibh, imperdiet ac iaculis eget, tristique eu ante. Quisque dapibus vulputate porttitor.
-
-Vestibulum rhoncus mauris eget est aliquet placerat. Curabitur dolor augue, consectetur non placerat in, feugiat eu ligula. Nulla vitae vulputate dui. Nam nec magna in quam gravida vestibulum. Pellentesque lacinia hendrerit egestas. Mauris vestibulum aliquam sagittis. Phasellus fermentum velit non erat ullamcorper rutrum. Proin est orci, ullamcorper ut faucibus nec, aliquam quis est. Nunc eget elit felis, vel imperdiet ante. Quisque convallis, enim in lacinia pellentesque, justo massa dignissim massa, eget consectetur libero magna ac elit. Integer semper velit eu enim ornare mattis. Maecenas non massa diam. Etiam sed metus massa, vitae porta ligula.</textarea><br>
+				<textarea class="textareas" disabled="true"><?php echo($ticket_info['Issue']); ?></textarea><br>
+			<?php } else { ?>
+				<h1>No Ticket To Display! Sorry...</h1>
+				<p>Please Contact Technical Support: <a href="mailto:support@supporttracker.com">support@supporttracker.com</a></p>
+			<?php } ?>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 
