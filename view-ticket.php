@@ -10,7 +10,7 @@
 		$stmt->bindValue(1, $_GET['number']);
 		$stmt->execute();
 	
-		// Grab the tickets
+		// Grab the ticket
 		$ticket_info = $stmt->fetch();
 	}
 ?>

@@ -1,3 +1,20 @@
+<?php require_once('authority.php'); ?>
+<?php require_once('dbConnection.php'); ?>
+
+<?php	
+	//Select all Categories.
+	$stmt = $db->query('select * from category');
+	
+	// Grab the tickets
+	$categories = $stmt->fetchAll();
+	
+	//Query database for all tickets assigned to the current user.
+	$stmt = $db->query('select * from techs');
+	
+	// Grab the tickets
+	$techs = $stmt->fetchAll();
+?>
+
 <!DOCTYPE html>
 <!--Source File: create-ticket.php
 Name:Robert Foltz
@@ -36,7 +53,7 @@ File Description: This is the page that people use to create a ticket.
                         <li><a href="create-ticket.php">Create Ticket</a></li>
                         <li><a href="your-tickets.php">Your Tickets</a></li>
                         <li><a href="queue.php">Ticket Queue</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="authority.php?logout=true">Logout</a></li>
                     </ul>
                 </nav>
             </header>
@@ -49,35 +66,37 @@ File Description: This is the page that people use to create a ticket.
             <div class="main wrapper clearfix">
                 <h1 class="create-heading">Create Ticket</h1>
                 <p class="alert" >All Items with a * are required</p>
-                <form action="">
-                <label for="email"><span class="alert">*</span>Customer Email:</label><br>
-				<input type="text" name="email" id="email" placeholder="name@mail.com"><br>
+                <div class="error-message alert"></div>
+                <form method="POST" enctype="multipart/form-data" id="create-form">
+					<label for="email"><span class="alert">*</span>Customer Email:</label><br>
+					<input type="text" name="email" id="email" placeholder="name@mail.com"><br>
 				
-				<label for="name"><span class="alert">*</span>Customer Name:</label><br>
-				<input type="text" name="name" id="name" placeholder="John Smith"><br>
+					<label for="name"><span class="alert">*</span>Customer Name:</label><br>
+					<input type="text" name="name" id="name" placeholder="John Smith"><br>
 				
-				<label for="country"><span class="alert">*</span>Customer Country:</label><br>
-				<input type="text" name="country" id="country" placeholder="Canada"><br>
+					<label for="country"><span class="alert">*</span>Customer Country:</label><br>
+					<input type="text" name="country" id="country" placeholder="Canada"><br>
 				
-				<label for="category"><span class="alert">*</span>Category:</label><br>
-				<select name="category" id="category">
-					<option value=""></option>
-					<option value="1">Product Question</option>
-					<option value="2">Product Issue</option>
-				</select><br>
+					<label for="category"><span class="alert">*</span>Category:</label><br>
+					<select name="category" id="category">
+						<option value=""></option>
+						<?php foreach ($categories as $category) : ?>
+						<option value="<?php echo($category['CatID']); ?>"><?php echo($category['Catname']); ?></option>
+						<?php endforeach; ?>
+					</select><br>
 				
-				<label for="issue"><span class="alert">*</span>Question/Issue:</label><br>
-				<textarea class="textareas"></textarea><br>
+					<label for="issue"><span class="alert">*</span>Question/Issue:</label><br>
+					<textarea name="issue" id="issue" class="textareas"></textarea><br>
 				
-				<label for="technician"> Assign a Technician:</label><br>
-				<select name="technician" id="technician">
-					<option value=""></option>
-					<option value="1">Tom Tsiliopoulos</option>
-					<option value="2">Robert Foltz</option>
-					<option value="3">Kaitlyn Gray</option>
-				</select><br>
+					<label for="technician"> Assign a Technician:</label><br>
+					<select name="technician" id="technician">
+						<option value=""></option>
+						<?php foreach ($techs as $tech) : ?>
+						<option value="<?php echo($tech['UserID']); ?>"><?php echo($tech['Firstname']." ".$tech['Lastname']); ?></option>
+						<?php endforeach; ?>
+					</select><br>
 				
-				<input class="spaced" id="submit" type="submit" value="Submit Ticket"><br>
+					<input class="spaced" id="submit" type="submit" value="Submit Ticket"><br>
 				</form>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
@@ -100,6 +119,6 @@ File Description: This is the page that people use to create a ticket.
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
 
         <!-- My Javascript. -->
-        <script src="js/main.js"></script>
+        <script src="js/create-ticket.js"></script>
     </body>
 </html>
