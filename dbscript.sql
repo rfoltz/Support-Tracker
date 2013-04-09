@@ -43,7 +43,8 @@ FOREIGN KEY (Technician) REFERENCES robertfo_stracker.techs(UserID)
 INSERT INTO robertfo_stracker.techs (Firstname, Lastname, Username, Password)
 VALUES ('Robert','Foltz','rfoltz','09c0a300a137693e18d4b80aa23bbcaf74247090'), -- Password = 123456
 ('Kaitlyn','Gray','kgray','09c0a300a137693e18d4b80aa23bbcaf74247090'), -- Password = 123456
-('Tom','Tsiliopoulos','ttsiliopoulos','09c0a300a137693e18d4b80aa23bbcaf74247090'); -- Password = 123456
+('Tom','Tsiliopoulos','ttsiliopoulos','09c0a300a137693e18d4b80aa23bbcaf74247090'), -- Password = 123456
+('What','Demo','demo','09c0a300a137693e18d4b80aa23bbcaf74247090'); -- Password = 123456
 
 
 INSERT INTO robertfo_stracker.category (Catname)
@@ -59,4 +60,8 @@ VALUES ('2013-04-02 13:00:00','2013-04-05 12:01','rfoltz@mail.com','Robert Foltz
 ('2013-04-07 13:00:00','2013-04-07 12:01','nstark@mail.com','Ned Stark', 'Canada', 'I''m Having an issue with Product Y', 1, 1),
 ('2013-04-08 13:00:00','2013-04-08 12:01','gmartin@mail.com','George Martin', 'Canada', 'I just wanted to know about Product X', 2, 2),
 ('2013-04-09 13:00:00','2013-04-09 12:01','rjordan@mail.com','Robert Jordan', 'Canada', 'I''m Having an issue with Product Y', 1, 1),
-('2013-04-10 13:00:00','2013-04-10 12:01','bsanderson@mail.com','Brandon Sanderson', 'Canada', 'I just wanted to know about Product X', 3, 2);
+('2013-04-10 13:00:00','2013-04-10 12:01','bsanderson@mail.com','Brandon Sanderson', 'Canada', 'I just wanted to know about Product X', 3, 2),
+('2013-04-07 13:00:00','2013-04-07 12:01','nstark@mail.com','Ned Stark', 'Canada', 'I''m Having an issue with Product Y', 4, 1),
+('2013-04-08 13:00:00','2013-04-08 12:01','gmartin@mail.com','George Martin', 'Canada', 'I just wanted to know about Product X', 4, 2),
+('2013-04-09 13:00:00','2013-04-09 12:01','rjordan@mail.com','Robert Jordan', 'Canada', 'I''m Having an issue with Product Y', 4, 1),
+('2013-04-10 13:00:00','2013-04-10 12:01','bsanderson@mail.com','Brandon Sanderson', 'Canada', 'I just wanted to know about Product X', 4, 2);

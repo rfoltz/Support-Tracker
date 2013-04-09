@@ -120,9 +120,6 @@ File Description: This is the page that lists un-assigned tickets.
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         
-        <!-- FlexSlider -->
-	    <script defer src="js/jquery.flexslider-min.js"></script>
-        
         <!-- My Javascript. -->
         <script src="js/main.js"></script>
     </body>

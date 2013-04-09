@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+//if the user is already logged in just redirect them to the your tickets page.
+if(isset($_SESSION['UserID']) && isset($_SESSION['Firstname']) && isset($_SESSION['Lastname'])) 
+{
+  header("Location: your-tickets.php");
+  exit;
+}
+?>
+
 <!DOCTYPE html>
 <!--Source File: login.php
 Name:Robert Foltz
@@ -46,7 +57,8 @@ File Description: This is the login page to view, and create tickets.
         <div class="main-container">
             <div class="main wrapper clearfix">
             	<h1>Support Tracker Login</h1>
-				<form action="#" method="POST" enctype="multipart/form-data" id="login_form">
+            	<div class="error-message alert"></div>
+				<form method="POST" enctype="multipart/form-data" id="login-form">
 					<table id="login-table">
 						<tr>
 							<td>Username: </td>
@@ -80,11 +92,9 @@ File Description: This is the login page to view, and create tickets.
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-        
-        <!-- FlexSlider -->
-	    <script defer src="js/jquery.flexslider-min.js"></script>
-        
+
         <!-- My Javascript. -->
+        <script src="js/login-page.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

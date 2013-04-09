@@ -1,3 +1,16 @@
+<?php require_once('authority.php'); ?>
+<?php require_once('dbConnection.php'); ?>
+
+<?php	
+	//Query database for all tickets assigned to the current user.
+	$stmt = $db->prepare('select *,LPAD(Num,7,"0") as ticket_num from tickets where technician = ?');
+	$stmt->bindValue(1, $_SESSION['UserID']);
+	$stmt->execute();
+	
+	// Check if user provided correct username and password
+	$ticket_info = $stmt->fetchAll();
+?>
+
 <!DOCTYPE html>
 <!--Source File: index.php
 Name:Robert Foltz
@@ -36,7 +49,7 @@ File Description: This is the page the displays the currently logged in user the
                         <li><a href="create-ticket.php">Create Ticket</a></li>
                         <li><a href="your-tickets.php">Your Tickets</a></li>
                         <li><a href="queue.php">Ticket Queue</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="authority.php?logout=true">Logout</a></li>
                     </ul>
                 </nav>
             </header>
@@ -47,7 +60,7 @@ File Description: This is the page the displays the currently logged in user the
     -->
         <div class="main-container">
             <div class="main wrapper clearfix">
-            	<p class="as">Logged In As: <span>User ID</span></p>
+            	<p class="as">Logged In As: <?php echo($_SESSION['Firstname']." ".$_SESSION['Lastname']); ?></p>
                 <h1>Currently Assigned Tickets</h1>
                 <form action="">
 					<table id="ticket-queue" border="1">
@@ -60,24 +73,27 @@ File Description: This is the page the displays the currently logged in user the
 							<th>View</th>
 							<th>Update</th>
 						</tr>
+						<?php foreach ($ticket_info as $ticket) : ?>
 						<tr>
-							<td><input type="checkbox" name="checked" value="1"></td>
-							<td><a href="#">#0000001</a></td>
-							<td>Product Question</td>
-							<td>2013-04-02 13:00</td>
-							<td>2013-04-05 12:01</td>
+							<td><input type="checkbox" name="checked" value="<?php echo($ticket['Num']); ?>"></td>
+							<td><a href="#">#<?php echo($ticket['ticket_num']); ?></a></td>
+							
+							<?php	
+								//Check for what category the ticket is in.
+								$stmt = $db->prepare('select Catname from category where CatID = ?');
+								$stmt->bindValue(1, $ticket['Category']);
+								$stmt->execute();
+	
+								// Check if user provided correct username and password
+								$category = $stmt->fetch();
+							?>
+							<td><?php echo($category['Catname']); ?></td>
+							<td><?php echo($ticket['Created']); ?></td>
+							<td><?php echo($ticket['Updated']); ?></td>
 							<td><a href="#">View</a></td>
 							<td><a href="#">Update</a></td>
 						</tr>
-						<tr>
-							<td><input type="checkbox" name="checked" value="2"></td>
-							<td><a href="#">#0000002</a></td>
-							<td>Product Issue</td>
-							<td>2013-04-02 13:00</td>
-							<td>2013-04-05 12:01</td>
-							<td><a href="#">View</a></td>
-							<td><a href="#">Update</a></td>
-						</tr>
+						<?php endforeach; ?>
 					</table>
 					<input class="spaced" type="submit" name="delete" value="Delete">
 					<input class="spaced" type="submit" name="completed" value="Completed">
@@ -101,9 +117,6 @@ File Description: This is the page the displays the currently logged in user the
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-        
-        <!-- FlexSlider -->
-	    <script defer src="js/jquery.flexslider-min.js"></script>
         
         <!-- My Javascript. -->
         <script src="js/main.js"></script>
