@@ -1,15 +1,22 @@
-/* Source File: create-ticket.js
+/* Source File: update-ticket.js
 Name:Robert Foltz
 Last Modified By: Robert Foltz
 Website Name: Support Tracker
-File Description: This is the page does the AJAXing to the login script.
+File Description: This is the page does the AJAXing to the update ticket handler.
 */
 
 $(document).ready(function() {
 	/** Login Form Submission
 	 *		Handles form validation and AJAXing to server.
 	 */
-	$("#create-form").submit(function () {
+	$("#update-form").submit(function () {
+		//Check to ensure category is filled.
+		if ($("#category").val().length == 0) {
+			$(".error-message").text("Please enter a category.");
+			$("#category").focus();
+			return false;
+		}
+		
 		//Check to ensure email is filled.
 		if ($("#email").val().length == 0) {
 			$(".error-message").text("Please enter a customer email.");
@@ -31,13 +38,6 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		//Check to ensure category is filled.
-		if ($("#category").val().length == 0) {
-			$(".error-message").text("Please enter a category.");
-			$("#category").focus();
-			return false;
-		}
-		
 		//Check to ensure issue is filled.
 		if ($("#issue").val().length == 0) {
 			$(".error-message").text("Please enter the issue or question.");
@@ -48,23 +48,17 @@ $(document).ready(function() {
 		// AJAX server to validate login information.
 		$.ajax({  
 		  type: "POST",
-		  url: "creating-ticket.php",  
-		  data: $("#create-form").serialize(),
+		  url: "updating-ticket.php",  
+		  data: $("#update-form").serialize(),
 		  success: function(data) {
-				var login = JSON.parse(data);
-				if (login.success) {
-					//Reset inputs to original value.
-					$('.error-message').empty();
-					$('input:text').val('');
-					$('textarea').val('');
-					$('#category').prop('selectedIndex',0);
-					$('#technician').prop('selectedIndex',0);
-					alert(login.message); //Show the ticket was created!
+				var result = JSON.parse(data);
+				if (result.success) {
+					alert(result.message);
 				} else {
-					alert(login.message);
+					alert(result.message);
 				}
 		  }
 		});  
-		return false;		
+		return false;	
 	});
 });

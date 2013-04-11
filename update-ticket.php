@@ -1,3 +1,31 @@
+<?php require_once('authority.php'); ?>
+<?php require_once('dbConnection.php'); ?>
+
+<?php	
+	//Select all Categories.
+	$stmt = $db->query('select * from category');
+	
+	// Grab the tickets
+	$categories = $stmt->fetchAll();
+	
+	//Query database for all tickets assigned to the current user.
+	$stmt = $db->query('select * from techs');
+	
+	// Grab the tickets
+	$techs = $stmt->fetchAll();
+	
+	if(isset($_GET['number'])) //Only connect to the database if a ticket is being queried.
+	{
+		//Query database for all tickets assigned to the current user.
+		$stmt = $db->prepare('select *,LPAD(Num,7,"0") as ticket_num from tickets where num = ?');
+		$stmt->bindValue(1, $_GET['number']);
+		$stmt->execute();
+	
+		// Grab the ticket
+		$ticket_info = $stmt->fetch();
+	}
+?>
+
 <!DOCTYPE html>
 <!--Source File: create-ticket.php
 Name:Robert Foltz
@@ -36,7 +64,7 @@ File Description: This is the page that people use to create a ticket.
                         <li><a href="create-ticket.php">Create Ticket</a></li>
                         <li><a href="your-tickets.php">Your Tickets</a></li>
                         <li><a href="queue.php">Ticket Queue</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="authority.php?logout=true">Logout</a></li>
                     </ul>
                 </nav>
             </header>
@@ -47,49 +75,61 @@ File Description: This is the page that people use to create a ticket.
     -->
         <div class="main-container">
             <div class="main wrapper clearfix">
-                <h1 class="create-heading">Updating Ticket #: 0000001</h1>
+                <h1 class="create-heading">Updating Ticket #: <?php echo($ticket_info['ticket_num']); ?></h1>
                 <p class="alert" >All Items with a * are required</p>
-                <form action="">
+                <div class="error-message alert"></div>
+                <form method="POST" enctype="multipart/form-data" id="update-form">
+                
+                <input name="ticket-num" id="ticket-num" type="hidden" value="<?php echo($ticket_info['Num']); ?>">
                 
                 <label for="technician">Technician:</label><br>
 				<select name="technician" id="technician">
 					<option value=""></option>
-					<option value="1">Tom Tsiliopoulos</option>
-					<option value="2">Robert Foltz</option>
-					<option value="3">Kaitlyn Gray</option>
+					<?php foreach ($techs as $tech) : ?>
+						<?php if($tech['UserID'] == $ticket_info['Technician']) {?>
+								<option selected value="<?php echo($tech['UserID']); ?>"><?php echo($tech['Firstname']." ".$tech['Lastname']); ?></option>
+						<?php } else { ?>
+								<option value="<?php echo($tech['UserID']); ?>"><?php echo($tech['Firstname']." ".$tech['Lastname']); ?></option>
+						<?php }?>
+					<?php endforeach; ?>
 				</select><br>
 				
 				<label for="category"><span class="alert">*</span>Category:</label><br>
 				<select name="category" id="category">
-					<option value=""></option>
-					<option value="1">Product Question</option>
-					<option value="2">Product Issue</option>
+					<?php foreach ($categories as $category) : ?>
+						<?php if($category['CatID'] == $ticket_info['Category']) {?>
+							<option selected value="<?php echo($category['CatID']); ?>"><?php echo($category['Catname']); ?></option>
+						<?php } else { ?>
+							<option value="<?php echo($category['CatID']); ?>"><?php echo($category['Catname']); ?></option>
+						<?php }?>
+					<?php endforeach; ?>
 				</select><br>
 				
 				<label for="created">Created:</label><br>
-				<label>2013-04-02 13:00</label><br>
+				<label name="created"><?php echo($ticket_info['Created']); ?></label><br>
 				
-				<label for="created">Last Updated:</label><br>
-				<label>2013-04-05 12:01</label><br>
+				<label for="updated">Last Updated:</label><br>
+				<label name="updated"><?php echo($ticket_info['Updated']); ?></label><br>
                 
                 <label for="email"><span class="alert">*</span>Customer Email:</label><br>
-				<input type="text" name="email" id="email" placeholder="name@mail.com"><br>
+				<input type="text" name="email" id="email" value="<?php echo($ticket_info['CEmail']); ?>"><br>
 				
 				<label for="name"><span class="alert">*</span>Customer Name:</label><br>
-				<input type="text" name="name" id="name" placeholder="John Smith"><br>
+				<input type="text" name="name" id="name" value="<?php echo($ticket_info['CName']); ?>"><br>
 				
 				<label for="country"><span class="alert">*</span>Customer Country:</label><br>
-				<input type="text" name="country" id="country" placeholder="Canada"><br>
+				<input type="text" name="country" id="country" value="<?php echo($ticket_info['CCountry']); ?>"><br>
 				
 				<label for="issue"><span class="alert">*</span>Question/Issue:</label><br>
-				<textarea class="textareas"></textarea><br>
+				<textarea name="issue" id="issue" class="textareas"><?php echo($ticket_info['Issue']); ?></textarea><br>
 				
 				
 				
-				<input class="spaced" id="submit" type="submit" value="Update"><input class="spaced" id="submit" type="submit" value="Delete"><input class="spaced" id="submit" type="submit" value="Completed"><br>
+				<input type="submit" name="update" id="update" class="spaced" value="Update">
 				</form>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
+        <!--<input class="spaced" id="submit" type="submit" value="Completed">-->
 
 		
         <!--
@@ -109,6 +149,6 @@ File Description: This is the page that people use to create a ticket.
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         
         <!-- My Javascript. -->
-        <script src="js/main.js"></script>
+        <script src="js/update-ticket.js"></script>
     </body>
 </html>

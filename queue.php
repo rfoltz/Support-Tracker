@@ -73,8 +73,8 @@ File Description: This is the page that lists un-assigned tickets.
 						</tr>
 						<?php foreach ($ticket_info as $ticket) : ?>
 						<tr>
-							<td><input type="checkbox" name="checked" value="<?php echo($ticket['Num']); ?>"></td>
-							<td><a href="#">#<?php echo($ticket['ticket_num']); ?></a></td>
+							<td><input type="checkbox" name="checked[]" value="<?php echo($ticket['Num']); ?>"></td>
+							<td><a href="update-ticket.php?number=<?php echo($ticket['Num']); ?>">#<?php echo($ticket['ticket_num']); ?></a></td>
 							
 							<?php	
 								//Check for what category the ticket is in.
@@ -89,7 +89,7 @@ File Description: This is the page that lists un-assigned tickets.
 							<td><?php echo($ticket['Created']); ?></td>
 							<td><?php echo($ticket['Updated']); ?></td>
 							<td><a href="view-ticket.php?number=<?php echo($ticket['Num']); ?>">View</a></td>
-							<td><a href="#">Update</a></td>
+							<td><a href="update-ticket.php?number=<?php echo($ticket['Num']); ?>">Update</a></td>
 						</tr>
 						<?php endforeach; ?>
 					</table>
