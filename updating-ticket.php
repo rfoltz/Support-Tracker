@@ -34,5 +34,4 @@
 	
 	// Encode response as JSON
 	echo (json_encode($json_data));
-
 ?>

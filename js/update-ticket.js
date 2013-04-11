@@ -9,7 +9,17 @@ $(document).ready(function() {
 	/** Login Form Submission
 	 *		Handles form validation and AJAXing to server.
 	 */
-	$("#update-form").submit(function () {
+	 
+	/*since the way the submit works with jQuery and doing it programatically
+	 it doesn't include what button was pressed we need a hidden input to record what
+	 button was pressed. I just hope that the jQuery is fast enough to change the value of
+	 the hidden input before the form is submitted to the server. 
+	*/
+	$('input[type="submit"]').click(function() {
+		$('#choice').val(this.name)
+	});
+	$("#update-form").submit(function (e) {
+		e.preventDefault();
 		//Check to ensure category is filled.
 		if ($("#category").val().length == 0) {
 			$(".error-message").text("Please enter a category.");
@@ -58,7 +68,9 @@ $(document).ready(function() {
 					alert(result.message);
 				}
 		  }
-		});  
-		return false;	
+		}).done(function (result) {
+            console.log(result);
+            console.log($("#update-form").serializeArray());
+        });  
 	});
 });

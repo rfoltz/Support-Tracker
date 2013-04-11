@@ -124,8 +124,8 @@ File Description: This is the page that people use to create a ticket.
 				<textarea name="issue" id="issue" class="textareas"><?php echo($ticket_info['Issue']); ?></textarea><br>
 				
 				
-				
-				<input type="submit" name="update" id="update" class="spaced" value="Update">
+				<input type="hidden" name="choice" id="choice" value="blarg"> <!--Holds button the user clicked. -->
+				<input type="submit" name="update" id="update" class="spaced" value="Update"> <input type="submit" name="delete" id="delete" class="spaced" value="Delete">
 				</form>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
