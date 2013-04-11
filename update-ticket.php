@@ -125,7 +125,7 @@ File Description: This is the page that people use to create a ticket.
 				
 				<!--Holds button the user clicked. Also this defaults to update just incase the user hits enter.-->
 				<input type="hidden" name="choice" id="choice" value="update">
-				<input type="submit" name="update" id="update" class="spaced" value="Update"> <input type="submit" name="delete" id="delete" class="spaced" value="Delete">
+				<input type="submit" name="update" id="update" class="spaced" value="Update"><input type="submit" name="delete" id="delete" class="spaced" value="Delete"><input type="submit" name="complete" id="complete" class="spaced" value="Completed">
 				</form>
             </div> <!-- #main -->
         </div> <!-- #main-container -->

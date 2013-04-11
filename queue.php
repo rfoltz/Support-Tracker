@@ -3,7 +3,7 @@
 
 <?php	
 	//Query database for all tickets assigned to the current user.
-	$stmt = $db->query('select *,LPAD(Num,7,"0") as ticket_num from tickets where technician is null');
+	$stmt = $db->query('select *,LPAD(Num,7,"0") as ticket_num from tickets where technician is null and completed <> "Y"');
 	
 	//Grab queue of tickets
 	$ticket_info = $stmt->fetchAll();

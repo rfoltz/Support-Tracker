@@ -3,7 +3,7 @@
 
 <?php	
 	//Query database for all tickets assigned to the current user.
-	$stmt = $db->prepare('select *,LPAD(Num,7,"0") as ticket_num from tickets where technician = ?');
+	$stmt = $db->prepare('select *,LPAD(Num,7,"0") as ticket_num from tickets where technician = ? and completed <> "Y" ');
 	$stmt->bindValue(1, $_SESSION['UserID']);
 	$stmt->execute();
 	
