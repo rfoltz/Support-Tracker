@@ -34,6 +34,7 @@ CCountry VARCHAR(120) NOT NULL,
 Issue LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
 Technician INT,
 Category INT NOT NULL,
+Completed CHAR default 'N',
 PRIMARY KEY (Num),
 FOREIGN KEY (Category) REFERENCES robertfo_stracker.category(CatID),
 FOREIGN KEY (Technician) REFERENCES robertfo_stracker.techs(UserID)

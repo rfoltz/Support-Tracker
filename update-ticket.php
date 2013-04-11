@@ -123,8 +123,8 @@ File Description: This is the page that people use to create a ticket.
 				<label for="issue"><span class="alert">*</span>Question/Issue:</label><br>
 				<textarea name="issue" id="issue" class="textareas"><?php echo($ticket_info['Issue']); ?></textarea><br>
 				
-				
-				<input type="hidden" name="choice" id="choice" value="blarg"> <!--Holds button the user clicked. -->
+				<!--Holds button the user clicked. Also this defaults to update just incase the user hits enter.-->
+				<input type="hidden" name="choice" id="choice" value="update">
 				<input type="submit" name="update" id="update" class="spaced" value="Update"> <input type="submit" name="delete" id="delete" class="spaced" value="Delete">
 				</form>
             </div> <!-- #main -->
@@ -149,6 +149,6 @@ File Description: This is the page that people use to create a ticket.
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         
         <!-- My Javascript. -->
-        <script src="js/update-ticket.js"></script>
+        <script src="js/ticketHandler.js"></script>
     </body>
 </html>

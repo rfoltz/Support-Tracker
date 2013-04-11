@@ -55,10 +55,10 @@ $(document).ready(function() {
 			return false;
 		}
 	
-		// AJAX server to validate login information.
+		// AJAX server to do things with the ticket
 		$.ajax({  
 		  type: "POST",
-		  url: "updating-ticket.php",  
+		  url: "ticketHandler.php",  
 		  data: $("#update-form").serialize(),
 		  success: function(data) {
 				var result = JSON.parse(data);
@@ -68,9 +68,6 @@ $(document).ready(function() {
 					alert(result.message);
 				}
 		  }
-		}).done(function (result) {
-            console.log(result);
-            console.log($("#update-form").serializeArray());
-        });  
+		});  
 	});
 });
