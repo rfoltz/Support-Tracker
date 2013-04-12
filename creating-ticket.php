@@ -1,4 +1,11 @@
 <?php
+/* Source File: create-ticket.php
+Name:Robert Foltz
+Last Modified By: Robert Foltz
+Website Name: Support Tracker
+File Description: This is the page that actually creates a ticket in the database
+*/
+
 	require_once('authority.php');
 	require_once('dbConnection.php');	
 	// 

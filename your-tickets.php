@@ -12,11 +12,11 @@
 ?>
 
 <!DOCTYPE html>
-<!--Source File: index.php
+<!--Source File: your-tickets.php
 Name:Robert Foltz
 Last Modified By: Robert Foltz
 Website Name: Support Tracker
-File Description: This is the page the displays the currently logged in user their tickets.
+File Description: This is the page the displays the tickets currently assigned to the user logged in.
 -->
 
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -62,7 +62,7 @@ File Description: This is the page the displays the currently logged in user the
             <div class="main wrapper clearfix">
             	<p class="as">Logged In As: <?php echo($_SESSION['Firstname']." ".$_SESSION['Lastname']); ?></p>
                 <h1>Currently Assigned Tickets</h1>
-                <form action="">
+                <form method="POST" enctype="multipart/form-data" id="your-form">
 					<table id="ticket-queue" border="1">
 						<tr>
 							<th></th>
@@ -75,7 +75,7 @@ File Description: This is the page the displays the currently logged in user the
 						</tr>
 						<?php foreach ($ticket_info as $ticket) : ?>
 						<tr>
-							<td><input type="checkbox" name="checked[]" value="<?php echo($ticket['Num']); ?>"></td>
+							<td><input id="checked" type="checkbox" name="checked[]" value="<?php echo($ticket['Num']); ?>"></td>
 							<td><a href="update-ticket.php?number=<?php echo($ticket['Num']); ?>">#<?php echo($ticket['ticket_num']); ?></a></td>
 							
 							<?php	
@@ -95,8 +95,9 @@ File Description: This is the page the displays the currently logged in user the
 						</tr>
 						<?php endforeach; ?>
 					</table>
+					<input class="spaced" type="hidden" name="choice" id="choice" value=""><!-- Holds which button was clicked -->
 					<input class="spaced" type="submit" name="delete" value="Delete">
-					<input class="spaced" type="submit" name="completed" value="Completed">
+					<input class="spaced" type="submit" name="complete" value="Completed">
 				</form>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
@@ -119,6 +120,6 @@ File Description: This is the page the displays the currently logged in user the
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         
         <!-- My Javascript. -->
-        <script src="js/main.js"></script>
+        <script src="js/yourHandler.js"></script>
     </body>
 </html>

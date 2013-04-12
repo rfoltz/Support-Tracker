@@ -1,11 +1,19 @@
 <?php
+/* Source File: ticketHandler.php
+Name:Robert Foltz
+Last Modified By: Robert Foltz
+Website Name: Support Tracker
+File Description: This is the page that handles the form when updating a ticket. You can either update/delete or compelete a ticket.
+					This page also handles all the database associated with those changes. 
+*/
+
 	require_once('authority.php');
 	require_once('dbConnection.php');	
 	// 
 	$json_data = array();
 	
 	
-	if(isset($_POST['choice']) && $_POST['choice'] == "update") {
+	if(isset($_POST['choice']) && $_POST['choice'] == "update") { // get the button choice
 		//Create a prepared statement to UPDATE a ticket 
 		$stmt = $db->prepare('UPDATE tickets SET Updated=?, CEmail=?, CName=?, CCountry=?, Issue=?, Technician=?, Category=? WHERE Num = ?');
 		$stmt->bindValue(1, date("Y-m-d H:i:s"));
@@ -23,7 +31,7 @@
 		$stmt->bindValue(7, $_POST['category']);
 		$stmt->bindValue(8, $_POST['ticket-num']);
 	
-		$sucessful = $stmt->execute();
+		$sucessful = $stmt->execute(); // execute statement
 		
 		//check to see if the statement executed successfully.
 		if($sucessful) {
@@ -76,6 +84,9 @@
 			$json_data['success'] = false;
 			$json_data['message'] = 'Hmm Something went wrong...';
 		}
+	} else { //just in case the hidden choice input doesn't have a choice display this.
+		$json_data['success'] = false;
+		$json_data['message'] = 'Hmm Something went wrong...';
 	}
 	
 	// Encode response as JSON

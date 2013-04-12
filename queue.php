@@ -10,7 +10,7 @@
 ?>
 
 <!DOCTYPE html>
-<!--Source File: index.php
+<!--Source File: queue.php
 Name:Robert Foltz
 Last Modified By: Robert Foltz
 Website Name: Support Tracker
@@ -60,7 +60,7 @@ File Description: This is the page that lists un-assigned tickets.
             <div class="main wrapper clearfix">
             	<p class="as">Logged In As: <?php echo($_SESSION['Firstname']." ".$_SESSION['Lastname']); ?></p>
                 <h1>Ticket Queue</h1>
-                <form action="">
+                <form method="POST" enctype="multipart/form-data" id="queue-form">
 					<table id="ticket-queue" border="1">
 						<tr>
 							<th></th>
@@ -73,7 +73,7 @@ File Description: This is the page that lists un-assigned tickets.
 						</tr>
 						<?php foreach ($ticket_info as $ticket) : ?>
 						<tr>
-							<td><input type="checkbox" name="checked[]" value="<?php echo($ticket['Num']); ?>"></td>
+							<td><input id="checked" type="checkbox" name="checked[]" value="<?php echo($ticket['Num']); ?>"></td>
 							<td><a href="update-ticket.php?number=<?php echo($ticket['Num']); ?>">#<?php echo($ticket['ticket_num']); ?></a></td>
 							
 							<?php	
@@ -93,6 +93,7 @@ File Description: This is the page that lists un-assigned tickets.
 						</tr>
 						<?php endforeach; ?>
 					</table>
+					<input class="spaced" type="hidden" name="choice" id="choice" value=""><!-- Holds which button was clicked -->
 					<input class="spaced" type="submit" name="delete" value="Delete">
 					<input class="spaced" type="submit" name="assign" value="Assign">
 				</form>
@@ -117,6 +118,6 @@ File Description: This is the page that lists un-assigned tickets.
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         
         <!-- My Javascript. -->
-        <script src="js/main.js"></script>
+        <script src="js/queueHandler.js"></script>
     </body>
 </html>

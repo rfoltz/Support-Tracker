@@ -2,7 +2,7 @@
 Name:Robert Foltz
 Last Modified By: Robert Foltz
 Website Name: Support Tracker
-File Description: This is the page does the AJAXing to the login script.
+File Description: This is the page does the AJAXing and validation to the creating-ticket.php which will create a ticket in the database.
 */
 
 $(document).ready(function() {

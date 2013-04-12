@@ -9,7 +9,7 @@ File Description: This is the page houses all the database connection stuff.
 $username_dbConnection = "robertfo_admin";
 $password_dbConnection = "Admin01";
 
-//New way of gaining a db connection
+//connection string to the db
 $dsn = 'mysql:host=localhost;dbname=robertfo_stracker';
 //Connect to database
 	try {

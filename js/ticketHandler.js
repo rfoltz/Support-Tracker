@@ -1,4 +1,4 @@
-/* Source File: update-ticket.js
+/* Source File: ticketHandler.js
 Name:Robert Foltz
 Last Modified By: Robert Foltz
 Website Name: Support Tracker
@@ -16,7 +16,7 @@ $(document).ready(function() {
 	 the hidden input before the form is submitted to the server. 
 	*/
 	$('input[type="submit"]').click(function() {
-		$('#choice').val(this.name)
+		$('#choice').val(this.name) // give the value of the button clicked to this hidden input.
 	});
 	$("#update-form").submit(function (e) {
 		e.preventDefault();

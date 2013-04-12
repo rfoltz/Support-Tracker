@@ -27,11 +27,11 @@
 ?>
 
 <!DOCTYPE html>
-<!--Source File: create-ticket.php
+<!--Source File: update-ticket.php
 Name:Robert Foltz
 Last Modified By: Robert Foltz
 Website Name: Support Tracker
-File Description: This is the page that people use to create a ticket.
+File Description: This is the page that people use to update a ticket.
 -->
 
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->

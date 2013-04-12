@@ -1,9 +1,16 @@
 <?php
+	/* Source File: loggingIn.php
+	Name:Robert Foltz
+	Last Modified By: Robert Foltz
+	Website Name: Support Tracker
+	File Description: This is the page that logs the user into the website.
+	*/
+
 	require_once('dbConnection.php');	
 	// 
 	$json_data = array();
 	
-	// encrypt password
+	//encrypt password
 	$salt = "foo";
 	$pepper = "bar";
 	$salt = sha1($salt);

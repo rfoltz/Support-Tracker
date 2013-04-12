@@ -2,7 +2,7 @@
 Name:Robert Foltz
 Last Modified By: Robert Foltz
 Website Name: Support Tracker
-File Description: This is the page does the AJAXing to the login script.
+File Description: This is the page does the AJAXing to the login script as well as validation to make sure they've at least put something in the boxes.
 */
 
 $(document).ready(function() {
