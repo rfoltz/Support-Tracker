@@ -112,7 +112,7 @@ File Description: This is the page that people use to update a ticket.
 				<label name="updated"><?php echo($ticket_info['Updated']); ?></label><br>
                 
                 <label for="email"><span class="alert">*</span>Customer Email:</label><br>
-				<input type="text" name="email" id="email" value="<?php echo($ticket_info['CEmail']); ?>"><br>
+				<input type="email" name="email" id="email" value="<?php echo($ticket_info['CEmail']); ?>"><br>
 				
 				<label for="name"><span class="alert">*</span>Customer Name:</label><br>
 				<input type="text" name="name" id="name" value="<?php echo($ticket_info['CName']); ?>"><br>

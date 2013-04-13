@@ -69,7 +69,7 @@ File Description: This is the page that people use to create a ticket.
                 <div class="error-message alert"></div>
                 <form method="POST" enctype="multipart/form-data" id="create-form">
 					<label for="email"><span class="alert">*</span>Customer Email:</label><br>
-					<input type="text" name="email" id="email" placeholder="name@mail.com"><br>
+					<input type="email" name="email" id="email" placeholder="name@mail.com"><br>
 				
 					<label for="name"><span class="alert">*</span>Customer Name:</label><br>
 					<input type="text" name="name" id="name" placeholder="John Smith"><br>
