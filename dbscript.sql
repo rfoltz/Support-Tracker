@@ -49,8 +49,15 @@ VALUES ('Robert','Foltz','rfoltz','09c0a300a137693e18d4b80aa23bbcaf74247090'), -
 
 
 INSERT INTO robertfo_stracker.category (Catname)
-VALUES ('Product Issues'),
-('Product Questions');
+VALUES ('General Issues'),
+('Product Questions'),
+('Motherboard'),
+('Graphics Card'),
+('Network Card'),
+('Sound Card'),
+('Software'),
+('Operating System'),
+('Other');
 
 INSERT INTO robertfo_stracker.tickets (Created, Updated, CEmail, CName, CCountry, Issue, Technician, Category)
 VALUES ('2013-04-02 13:00:00','2013-04-05 12:01','rfoltz@mail.com','Robert Foltz', 'Canada', 'I just wanted to know about Product X', NULL, 2),
