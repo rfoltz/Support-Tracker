@@ -116,6 +116,9 @@ File Description: This is the page that people use to view a ticket.
 				</table>
 				<label>Question/Issue:</label><br>
 				<textarea class="textareas" disabled="true"><?php echo($ticket_info['Issue']); ?></textarea><br>
+				
+				<label>Log:</label><br>
+				<textarea class="textareas" disabled="true"><?php echo($ticket_info['Log']); ?></textarea><br>
 			<?php } else { ?>
 				<h1>No Ticket To Display! Sorry...</h1>
 				<p>Please Contact Technical Support: <a href="mailto:support@supporttracker.com">support@supporttracker.com</a></p>
