@@ -32,20 +32,33 @@ File Description: This is the page that handles the delete and complete button o
 				
 			}
 			
-		} else if(isset($_POST['choice']) && $_POST['choice'] == "complete") { //get the chice of the button.
+		} else if(isset($_POST['choice']) && $_POST['choice'] == "close") { //get the chice of the button.
 			$optionArray = $_POST['checked']; //get array of the checked tickets.
 			foreach ($optionArray as $ticket => $value) {
+				$rightnow = date("Y-m-d H:i:s");
+			
+				//Get the tickets log and then append the a message to the log.
+				$stmt = $db->prepare('select Log from tickets WHERE Num = ?');
+				$stmt->bindValue(1, $value);
+				$stmt->execute();
+
+				$ticket_info = $stmt->fetch();
+				$log = $ticket_info['Log'].'Closed at '.$rightnow.' By '.$_SESSION['Firstname']." ".$_SESSION['Lastname']."\n";
+			
+			
+			
 				//Create a prepared statement to UPDATE a ticket 
-				$stmt = $db->prepare('UPDATE tickets SET Updated=?, Completed = "Y" WHERE Num = ?'); //complete checked tickets
+				$stmt = $db->prepare('UPDATE tickets SET Updated=?, Completed = "Y", Log = ? WHERE Num = ?'); //complete checked tickets
 				$stmt->bindValue(1, date("Y-m-d H:i:s"));
-				$stmt->bindValue(2, $value);
+				$stmt->bindValue(2, $log);
+				$stmt->bindValue(3, $value);
 	
 				$sucessful = $stmt->execute();
 	
 				//check to see if the statement executed successfully.
 				if($sucessful) {
 					$json_data['success'] = true;
-					$json_data['message'] = $json_data['message']."Ticket Number ".$value." was Completed!\n"; //tell user what tickets were completed.
+					$json_data['message'] = $json_data['message']."Ticket Number ".$value." was Closed!\n"; //tell user what tickets were completed.
 				} else {
 					$json_data['success'] = false;
 					$json_data['message'] = 'Hmm Something went wrong...';

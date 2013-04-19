@@ -113,7 +113,7 @@ File Description: This is the page that lists un-assigned tickets.
                 
                 <!-- Here's the code for the completed tickets. -->
                 
-                <h1>Completed Tickets</h1>
+                <h1>Closed Tickets</h1>
 				<?php 
                 if(count($completed_tickets)  > 0) //if there is tickets display them
                 {
@@ -158,7 +158,7 @@ File Description: This is the page that lists un-assigned tickets.
 				<?php 
                 } else { // else display a message saying there are no tickets
                 ?>
-                <p>There are no completed tickets!</p>
+                <p>There are no closed tickets!</p>
                 <?php } ?>
             </div> <!-- #main -->
         </div> <!-- #main-container -->

@@ -101,7 +101,7 @@ File Description: This is the page the displays the tickets currently assigned t
 					</table>
 					<input class="spaced" type="hidden" name="choice" id="choice" value=""><!-- Holds which button was clicked -->
 					<input class="spaced" type="submit" name="delete" value="Delete">
-					<input class="spaced" type="submit" name="complete" value="Completed">
+					<input class="spaced" type="submit" name="close" value="Close">
 				</form>
 				<?php 
                 } else {

@@ -128,7 +128,13 @@ File Description: This is the page that people use to update a ticket.
 				
 				<!--Holds button the user clicked. Also this defaults to update just incase the user hits enter.-->
 				<input type="hidden" name="choice" id="choice" value="update">
-				<input type="submit" name="update" id="update" class="spaced" value="Update"><input type="submit" name="delete" id="delete" class="spaced" value="Delete"><input type="submit" name="complete" id="complete" class="spaced" value="Completed">
+				<input type="submit" name="update" id="update" class="spaced" value="Update">
+				<input type="submit" name="delete" id="delete" class="spaced" value="Delete">
+				<?php if($ticket_info['Completed'] == "N") { ?>
+				<input type="submit" name="close" id="close" class="spaced" value="Close">
+				<?php } else {?>
+				<input type="submit" name="reopen" id="reopen" class="spaced" value="Reopen">
+				<?php }?>
 				</form>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
