@@ -62,6 +62,10 @@ File Description: This is the page the displays the tickets currently assigned t
             <div class="main wrapper clearfix">
             	<p class="as">Logged In As: <?php echo($_SESSION['Firstname']." ".$_SESSION['Lastname']); ?></p>
                 <h1>Currently Assigned Tickets</h1>
+                <?php 
+                if(count($ticket_info)  > 0)
+                {
+                ?>
                 <form method="POST" enctype="multipart/form-data" id="your-form">
 					<table id="ticket-queue" border="1">
 						<tr>
@@ -99,6 +103,11 @@ File Description: This is the page the displays the tickets currently assigned t
 					<input class="spaced" type="submit" name="delete" value="Delete">
 					<input class="spaced" type="submit" name="complete" value="Completed">
 				</form>
+				<?php 
+                } else {
+                ?>
+                <p>There are no tickets currently assigned to you.</p>
+                <?php } ?>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 

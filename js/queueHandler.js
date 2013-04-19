@@ -16,24 +16,48 @@ $(document).ready(function() {
 	 the hidden input before the form is submitted to the server. 
 	*/
 	$('input[type="submit"]').click(function() {
-		$('#choice').val(this.name) // give the value of the button clicked to this hidden input.
+		$('.choice').val(this.name) // give the value of the button clicked to this hidden input.
 	});
-	$("#queue-form").submit(function (e) {
-		e.preventDefault();
-		// AJAX server to do things with the ticket
-		$.ajax({  
-		  type: "POST",
-		  url: "queueHandler.php",  
-		  data: $("#queue-form").serialize(),
-		  success: function(data) {
-				var result = JSON.parse(data);
-				if (result.success) {
-					alert(result.message);
-				} else {
-					console.log(result);
-					console.log($("#queue-form").serialize());
-				}
-		  }
-		});  
+	
+	$('.queue').click(function() {
+		$("#queue-form").submit(function (e) {
+			e.preventDefault();
+			// AJAX server to do things with the ticket
+			$.ajax({  
+			  type: "POST",
+			  url: "queueHandler.php",  
+			  data: $("#queue-form").serialize(),
+			  success: function(data) {
+					var result = JSON.parse(data);
+					if (result.success) {
+						alert(result.message);
+					} else {
+						console.log(result);
+						console.log($("#queue-form").serialize());
+					}
+			  }
+			});  
+		});
+	});
+	
+	$('.completed').click(function() {
+		$("#complete-form").submit(function (e) {
+			e.preventDefault();
+			// AJAX server to do things with the ticket
+			$.ajax({  
+			  type: "POST",
+			  url: "queueHandler.php",  
+			  data: $("#complete-form").serialize(),
+			  success: function(data) {
+					var result = JSON.parse(data);
+					if (result.success) {
+						alert(result.message);
+					} else {
+						console.log(result);
+						console.log($("#complete-form").serialize());
+					}
+			  }
+			});  
+		});
 	});
 });
